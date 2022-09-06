@@ -1,26 +1,26 @@
-specVersion: 0.0.1
+specVersion: 0.0.4
 schema:
-  file: ./schema.graphql
+    file: ./schema.graphql
 dataSources:
-  - kind: ethereum
-    name: undefined
-    network: mumbai
-    source:
-      address: "0xED1257126ecc62Ee2Ff4b04911795E5C0B609c8C"
-      abi: Wagmi
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.5
-      language: wasm/assemblyscript
-      entities:
-        - AgreementAdded
-        - Signed
-      abis:
-        - name: Wagmi
-          file: ./abis/Wagmi.json
-      eventHandlers:
-        - event: AgreementAdded(string,address)
-          handler: handleAgreementAdded
-        - event: Signed(string,address)
-          handler: handleSigned
-      file: ./src/wagmi.ts
+    - kind: ethereum
+      name: undefined
+      network: mumbai
+      source:
+          address: "0xC70b8Db42e3658fC8a3615451e93AaF614a8abFD"
+          abi: Wagmi
+      mapping:
+          kind: ethereum/events
+          apiVersion: 0.0.5
+          language: wasm/assemblyscript
+          entities:
+              - AgreementAdded
+              - Signed
+          abis:
+              - name: Wagmi
+                file: ./abis/Wagmi.json
+          eventHandlers:
+              - event: AgreementAdded(string,address,uint256)
+                handler: handleAgreementAdded
+              - event: Signed(string,address,uint256)
+                handler: handleSigned
+          file: ./src/wagmi.ts

@@ -1,6 +1,7 @@
-type ExampleEntity @entity {
-  id: ID!
-  count: BigInt!
-  agreement: String! # string
-  signer: Bytes! # address
+type AgreementEntity @entity {
+	id: ID!
+	count: BigInt!
+	agreement: String! # string
+	signer: Bytes! # address
+	isSigned: Boolean!
 }
