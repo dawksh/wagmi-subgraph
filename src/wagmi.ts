@@ -5,7 +5,7 @@ import { AgreementEntity } from "../generated/schema";
 export function handleAgreementAdded(event: AgreementAdded): void {
 	// Entities can be loaded from the store using a string ID; this ID
 	// needs to be unique across all entities of the same type
-	let entity = AgreementEntity.load(event.transaction.from.toHex());
+	let entity = AgreementEntity.load(event.params.id.toString());
 
 	// Entities only exist after they have been saved to the store;
 	// `null` checks allow to create entities on demand
