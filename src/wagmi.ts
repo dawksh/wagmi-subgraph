@@ -15,6 +15,8 @@ export function handleAgreementAdded(event: AgreementAdded): void {
 		entity.count = event.params.id;
 		entity.signer = event.params.signer;
 		entity.isSigned = false;
+
+		entity.save();
 	}
 }
 
