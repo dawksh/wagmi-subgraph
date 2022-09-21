@@ -6,7 +6,7 @@ dataSources:
       name: undefined
       network: mumbai
       source:
-          address: "0x652cADF0120a1A55F583F5B2dcC001DF577D5c8B"
+          address: "0xCb4aD097Aa4E40756EfFaEa3085F1a910DdEd375"
           abi: Wagmi
       mapping:
           kind: ethereum/events

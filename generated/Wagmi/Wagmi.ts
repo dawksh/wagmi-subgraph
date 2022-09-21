@@ -114,45 +114,6 @@ export class Wagmi__indexToAgreementStorageResult {
   }
 }
 
-export class Wagmi__signerToAgreementMappingResult {
-  value0: BigInt;
-  value1: Address;
-  value2: string;
-  value3: Bytes;
-
-  constructor(value0: BigInt, value1: Address, value2: string, value3: Bytes) {
-    this.value0 = value0;
-    this.value1 = value1;
-    this.value2 = value2;
-    this.value3 = value3;
-  }
-
-  toMap(): TypedMap<string, ethereum.Value> {
-    let map = new TypedMap<string, ethereum.Value>();
-    map.set("value0", ethereum.Value.fromUnsignedBigInt(this.value0));
-    map.set("value1", ethereum.Value.fromAddress(this.value1));
-    map.set("value2", ethereum.Value.fromString(this.value2));
-    map.set("value3", ethereum.Value.fromBytes(this.value3));
-    return map;
-  }
-
-  getId(): BigInt {
-    return this.value0;
-  }
-
-  getSigner(): Address {
-    return this.value1;
-  }
-
-  getAgreement(): string {
-    return this.value2;
-  }
-
-  getSignature(): Bytes {
-    return this.value3;
-  }
-}
-
 export class Wagmi extends ethereum.SmartContract {
   static bind(address: Address): Wagmi {
     return new Wagmi("Wagmi", address);
@@ -199,60 +160,12 @@ export class Wagmi extends ethereum.SmartContract {
     );
   }
 
-  signerToAgreementMapping(
-    param0: Address,
-    param1: BigInt
-  ): Wagmi__signerToAgreementMappingResult {
-    let result = super.call(
-      "signerToAgreementMapping",
-      "signerToAgreementMapping(address,uint256):(uint256,address,string,bytes)",
-      [
-        ethereum.Value.fromAddress(param0),
-        ethereum.Value.fromUnsignedBigInt(param1)
-      ]
-    );
-
-    return new Wagmi__signerToAgreementMappingResult(
-      result[0].toBigInt(),
-      result[1].toAddress(),
-      result[2].toString(),
-      result[3].toBytes()
-    );
-  }
-
-  try_signerToAgreementMapping(
-    param0: Address,
-    param1: BigInt
-  ): ethereum.CallResult<Wagmi__signerToAgreementMappingResult> {
-    let result = super.tryCall(
-      "signerToAgreementMapping",
-      "signerToAgreementMapping(address,uint256):(uint256,address,string,bytes)",
-      [
-        ethereum.Value.fromAddress(param0),
-        ethereum.Value.fromUnsignedBigInt(param1)
-      ]
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(
-      new Wagmi__signerToAgreementMappingResult(
-        value[0].toBigInt(),
-        value[1].toAddress(),
-        value[2].toString(),
-        value[3].toBytes()
-      )
-    );
-  }
-
-  verifyAgreement(signer: Address, _index: BigInt, agreement: string): boolean {
+  verifyAgreement(id: BigInt, agreement: string): boolean {
     let result = super.call(
       "verifyAgreement",
-      "verifyAgreement(address,uint256,string):(bool)",
+      "verifyAgreement(uint256,string):(bool)",
       [
-        ethereum.Value.fromAddress(signer),
-        ethereum.Value.fromUnsignedBigInt(_index),
+        ethereum.Value.fromUnsignedBigInt(id),
         ethereum.Value.fromString(agreement)
       ]
     );
@@ -261,16 +174,14 @@ export class Wagmi extends ethereum.SmartContract {
   }
 
   try_verifyAgreement(
-    signer: Address,
-    _index: BigInt,
+    id: BigInt,
     agreement: string
   ): ethereum.CallResult<boolean> {
     let result = super.tryCall(
       "verifyAgreement",
-      "verifyAgreement(address,uint256,string):(bool)",
+      "verifyAgreement(uint256,string):(bool)",
       [
-        ethereum.Value.fromAddress(signer),
-        ethereum.Value.fromUnsignedBigInt(_index),
+        ethereum.Value.fromUnsignedBigInt(id),
         ethereum.Value.fromString(agreement)
       ]
     );
@@ -391,32 +302,24 @@ export class SignAgreementCall__Inputs {
     this._call = call;
   }
 
-  get message(): string {
-    return this._call.inputValues[0].value.toString();
-  }
-
   get signature(): Bytes {
-    return this._call.inputValues[1].value.toBytes();
+    return this._call.inputValues[0].value.toBytes();
   }
 
   get id(): BigInt {
-    return this._call.inputValues[2].value.toBigInt();
-  }
-
-  get receiver(): Address {
-    return this._call.inputValues[3].value.toAddress();
+    return this._call.inputValues[1].value.toBigInt();
   }
 
   get root(): BigInt {
-    return this._call.inputValues[4].value.toBigInt();
+    return this._call.inputValues[2].value.toBigInt();
   }
 
   get nullifierHash(): BigInt {
-    return this._call.inputValues[5].value.toBigInt();
+    return this._call.inputValues[3].value.toBigInt();
   }
 
   get proof(): Array<BigInt> {
-    return this._call.inputValues[6].value.toBigIntArray();
+    return this._call.inputValues[4].value.toBigIntArray();
   }
 }
 

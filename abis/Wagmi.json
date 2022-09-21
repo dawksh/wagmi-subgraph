@@ -110,7 +110,7 @@
             "type": "bool"
           }
         ],
-        "internalType": "struct WAGMI.UnSignedAgreement",
+        "internalType": "struct WAGMI.Agreement",
         "name": "_agreement",
         "type": "tuple"
       }
@@ -162,11 +162,6 @@
   {
     "inputs": [
       {
-        "internalType": "string",
-        "name": "message",
-        "type": "string"
-      },
-      {
         "internalType": "bytes",
         "name": "signature",
         "type": "bytes"
@@ -175,11 +170,6 @@
         "internalType": "uint256",
         "name": "id",
         "type": "uint256"
-      },
-      {
-        "internalType": "address",
-        "name": "receiver",
-        "type": "address"
       },
       {
         "internalType": "uint256",
@@ -205,52 +195,8 @@
   {
     "inputs": [
       {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "signerToAgreementMapping",
-    "outputs": [
-      {
         "internalType": "uint256",
         "name": "id",
-        "type": "uint256"
-      },
-      {
-        "internalType": "address",
-        "name": "signer",
-        "type": "address"
-      },
-      {
-        "internalType": "string",
-        "name": "agreement",
-        "type": "string"
-      },
-      {
-        "internalType": "bytes",
-        "name": "signature",
-        "type": "bytes"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "signer",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_index",
         "type": "uint256"
       },
       {
